@@ -21,7 +21,9 @@ public class BeerCatalogServiceApplication {
     @Bean
     CommandLineRunner demoData(BeerRepository repository) {
         return args -> {
-            Stream.of("Heineken", "Fat Tire", "Samuel Adams", "Schlafly's", "Budweiser")
+            Stream.of("Sweetwater", "Orpheus", "Kingfisher",
+                    "Moose Drool", "Budweiser", "Schlafly",
+                    "Czech Budweiser", "Shafer Light")
                     .map(name -> new Beer(name))
                     .forEach(repository::save);
         };
