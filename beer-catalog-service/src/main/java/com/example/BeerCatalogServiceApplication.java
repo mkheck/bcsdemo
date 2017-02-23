@@ -7,7 +7,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
@@ -22,9 +21,8 @@ public class BeerCatalogServiceApplication {
     @Bean
     CommandLineRunner demoData(BeerRepository repository) {
         return args -> {
-            Stream.of("Budweiser", "Miller", "Samuel Adams", "Corona",
-                    "Heineken", "Dos Equis", "Fat Tire")
-                    .map(beerName -> new Beer(beerName))
+            Stream.of("Heineken", "Fat Tire", "Samuel Adams", "Schlafly's", "Budweiser")
+                    .map(name -> new Beer(name))
                     .forEach(repository::save);
         };
     }
@@ -35,7 +33,7 @@ public class BeerCatalogServiceApplication {
 }
 
 @RepositoryRestResource
-interface BeerRepository extends JpaRepository<Beer, Long> {}
+interface BeerRepository extends CrudRepository<Beer, Long> {}
 
 @Entity
 @Data
